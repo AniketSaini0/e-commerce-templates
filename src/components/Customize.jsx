@@ -80,7 +80,10 @@ const Customize = () => {
           loop
           playsInline
         >
-          <source src="public/images/videos/bg-video.mp4" type="video/mp4" />
+          <source
+            src="https://collection.cloudinary.com/derorn0vi/815e0f9dc797809a8e96b756c3d74bcc"
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
 
