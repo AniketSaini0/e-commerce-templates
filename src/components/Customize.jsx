@@ -81,7 +81,7 @@ const Customize = () => {
           playsInline
         >
           <source
-            src="https://collection.cloudinary.com/derorn0vi/815e0f9dc797809a8e96b756c3d74bcc"
+            src="https://collection.cloudinary.com/derorn0vi/815e0f9dc797809a8e96b756c3d74bcc.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
