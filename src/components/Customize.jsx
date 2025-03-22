@@ -79,6 +79,8 @@ const Customize = () => {
           muted
           loop
           playsInline
+          preload="none"
+          poster="thumbnail.jpg"
         >
           <source
             src="https://res.cloudinary.com/derorn0vi/video/upload/v1742544725/q4qbd10fkhripi62ndil.mp4"

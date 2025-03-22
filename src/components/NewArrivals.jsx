@@ -19,9 +19,11 @@ const NewArrivals = () => {
       }
     );
 
+    // Starting point of useEffect
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
+
     const currentRef = sectionRef.current;
 
     return () => {

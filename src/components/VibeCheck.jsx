@@ -1,9 +1,58 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Occasion } from "../assets/imagepaths";
 
 const VibeCheck = () => {
   const scrollRef = useRef(null);
+  const [loadedImages, setLoadedImages] = useState({});
+  const imageRefs = useRef([]);
+
+  useEffect(() => {
+    console.log("inside useEffect");
+
+    if (!imageRefs.current.length) {
+      console.log("useEffect not running");
+      return;
+    } // Prevents observer from running too early
+    console.log(imageRefs.current.length);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            console.count("inside entries");
+            const imageId = entry.target.dataset.id; // Get `data-id`
+            if (imageId && !loadedImages[imageId]) {
+              console.log("Loading image: ", imageId);
+              setLoadedImages((prev) => ({
+                ...prev,
+                [imageId]: true,
+              }));
+            }
+            console.log("unobserve set");
+            // observer.unobserve(entry.target);
+          }
+          console.log("entry is not intersecting");
+        });
+      },
+      {
+        threshold: 0.15, // ✅ Lower threshold so images load even if slightly visible
+        rootMargin: "100px", // ✅ Loads images **before** they appear
+      }
+    );
+
+    imageRefs.current.forEach((img) => {
+      if (img) {
+        console.log("Attaching observer toL ", img.dataset.id);
+        observer.observe(img);
+      } else console.log("img not available");
+    });
+
+    return () => {
+      console.log("Disconnecting observer");
+      observer.disconnect();
+    }; // Cleanup observer on unmount
+  }, [loadedImages]);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -25,7 +74,7 @@ const VibeCheck = () => {
       </h2>
 
       {/* Desktop Layout */}
-      <div className="hidden md:flex mt-4 ml-16 flex-row max-w-screen gap-4">
+      <div className="hidden md:flex mt-4 ml-16 flex-row md:max-w-screen gap-4">
         {/* Fixed image on the left (40% on desktop) */}
         <div className="w-1/3 relative">
           <div className="aspect-auto min-h-[48vh]">
@@ -33,6 +82,7 @@ const VibeCheck = () => {
               src="images/Groom-Shervani.jpeg"
               alt="Santa Solana Fashion Week"
               className="absolute -top-5 w-[90%] h-full object-contain"
+              loading="lazy"
             />
           </div>
 
@@ -52,13 +102,13 @@ const VibeCheck = () => {
           {/* Scroll buttons */}
           <button
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full p-2 shadow-md z-10"
+            className="absolute cursor-pointer left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full p-2 shadow-md z-10"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={scrollRight}
-            className="absolute right-1 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white rounded-full p-2 shadow-md z-10"
+            className="absolute cursor-pointer right-1 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white rounded-full p-2 shadow-md z-10"
           >
             <ChevronRight size={24} />
           </button>
@@ -67,16 +117,30 @@ const VibeCheck = () => {
           <div
             ref={scrollRef}
             className="flex overflow-x-auto w-full md:scale-[104%] min-h-[40vh] items-center gap-4 pb-3 scrollbar-hide"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
           >
             {/* Scrollable images */}
             {Occasion.map((product, index) => (
               <div key={product.id || index} className="flex-none w-72">
                 <div className="aspect-square">
                   <img
-                    src={product.image}
+                    data-id={product.id}
+                    src={
+                      loadedImages[product.id]
+                        ? product.image
+                        : "placeholder.jpg"
+                    }
                     alt={product.alt}
                     className="w-full h-full object-cover"
+                    // fetchPriority="low" // ✅ More reliable for desktop
+                    ref={(el) => {
+                      if (el && !imageRefs.current.includes(el)) {
+                        imageRefs.current.push(el);
+                      }
+                    }}
                   />
                 </div>
                 <div className="mt-2">
@@ -90,7 +154,7 @@ const VibeCheck = () => {
       </div>
 
       {/* Mobile Layout */}
-      <div className="md:hidden relative pb-4 mb-10">
+      <div className="md:hidden relative pb-6 mb-8">
         {/* Background image with overlay */}
         <div className="absolute inset-0 z-10 h-full w-full">
           <div
@@ -113,24 +177,30 @@ const VibeCheck = () => {
         </div>
 
         {/* Scrollable row for mobile */}
-        <div className="relative min-h-[50vh] top-[8vh] z-10">
+        <div className="relative min-h-[48vh] top-[8vh] z-10">
           <div
             className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {/* Scrollable images */}
-            {Occasion.map((item, index) => (
-              <div key={item.id || index} className="flex-none w-64">
+            {Occasion.map((product, index) => (
+              <div key={product.id || index} className="flex-none w-60">
                 <div className="aspect-square">
                   <img
-                    src={item.image}
-                    alt={item.alt}
+                    data-id={product.id}
+                    src={
+                      loadedImages[product.id]
+                        ? product.image
+                        : "placeholder.jpg"
+                    }
+                    alt={product.alt}
                     className="w-full h-full object-cover"
+                    ref={(el) => (imageRefs.current[index] = el)}
                   />
                 </div>
-                <div className="mt-2 bg-white/40 py-3 px-2">
-                  <h3 className="font-medium text-stone-900">{item.name}</h3>
-                  <p className="text-stone-700 text-sm">{item.alt}</p>
+                <div className="mt-2 bg-white/56 py-2 px-2">
+                  <h3 className="font-medium text-stone-950">{product.name}</h3>
+                  <p className="text-stone-800 text-sm">{product.alt}</p>
                 </div>
               </div>
             ))}

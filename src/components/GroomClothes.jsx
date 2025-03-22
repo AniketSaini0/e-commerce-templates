@@ -84,6 +84,7 @@ const GroomClothes = () => {
           }`}
           src="/images/modern.jpeg"
           alt="Modern Attire"
+          loading="lazy"
         />
       </div>
     </section>

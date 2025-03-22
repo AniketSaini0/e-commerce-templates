@@ -143,7 +143,9 @@ const Hero = ({ scrolled }) => {
             scrolled ? "-translate-y-8" : ""
           } ${currentSlide === index ? "opacity-100" : "opacity-0"}`}
           src={image.src}
+          // srcSet={`${image.src} 1x, ${image.src.replace(".jpg", "@2x.jpg")} 2x`}
           alt={image.alt}
+          fetchPriority={index === 0 ? "high" : "auto"} // ✅ Only first image is high priority
         />
       ))}
 
