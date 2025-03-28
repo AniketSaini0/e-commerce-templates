@@ -134,12 +134,12 @@ const Hero = ({ scrolled }) => {
   };
 
   return (
-    <div className="relative min-h-[90vh] w-full bg-[#f5e7d5] overflow-hidden">
+    <div className="relative min-h-[90vh] md:min-h-[102vh] lg:min-h-[108vh] w-full bg-[#f5e7d5] overflow-hidden">
       {/* Background images carousel */}
       {bannerImages.map((image, index) => (
         <img
           key={image.id}
-          className={`absolute bg-amber-50 inset-0 w-full h-full  mt-20 object-cover z-10 transition-all duration-500 ${
+          className={`absolute inset-0 w-full sm:rounded-xl md:rounded-2xl sm:w-[88%] sm:mx-auto sm:shadow-lg sm:shadow-black  md:w-[78%] h-full mt-[10vh] sm:mt-[11vh] md:mt-[12vh] lg:mt-[17vh] object-cover transition-all duration-500 ${
             scrolled ? "-translate-y-8" : ""
           } ${currentSlide === index ? "opacity-100" : "opacity-0"}`}
           src={image.src}
@@ -151,7 +151,7 @@ const Hero = ({ scrolled }) => {
 
       {/* Background gradient for overlay */}
       <div
-        className={`absolute inset-0 z-20 mt-10 pointer-events-none bg-[linear-gradient(to_bottom,#f5e7d5_0%,transparent_20%,transparent_95%,#ffedd4_100%)] transition-all duration-700 ${
+        className={`absolute inset-0 z-20 mt-10 pointer-events-none bg-[linear-gradient(to_bottom,#f5e7d5_0%,transparent_20%,transparent_100%)] transition-all duration-700 ${
           scrolled ? "" : " "
         }`}
       ></div>

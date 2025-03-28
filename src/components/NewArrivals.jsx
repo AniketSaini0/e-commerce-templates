@@ -36,7 +36,7 @@ const NewArrivals = () => {
   return (
     <section ref={sectionRef} className="bg-[#feedd5] relative py-16 md:py-24">
       {/* background gradient for overlay */}
-      <div className="absolute z-10 inset-0 pointer-events-none bg-gradient-to-b from-[#e6cdad] via-transparent to-transparent"></div>
+      <div className="absolute z-10 inset-0 pointer-events-none bg-gradient-to-b from-[#f5e7d5] via-[#e6cdad] to-transparent"></div>
 
       <div className="relative z-20 container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl py-8 mx-0 max-w-full bg-[#dc841f] font-light text-center text-stone-200 mb-12 md:mb-16">
@@ -104,7 +104,7 @@ const NewArrivals = () => {
 
               {/* Text below image */}
               <div
-                className={`mt-4 font-semibold pl-2 text-black text-2xl md:text-3xl transition-all duration-700 ${
+                className={`mt-2 p-2 font-semibold text-black text-2xl md:text-3xl transition-all duration-700 hover:bg-white/60 ${
                   isVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-10 opacity-0"

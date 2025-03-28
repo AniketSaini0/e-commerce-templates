@@ -53,9 +53,9 @@ const Navbar = ({ scrolled }) => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4">
+      <div className=" mx-auto px-4 py-0 sm:py-1 md:py-3 lg:py-5">
         {/* Logo centered */}
-        <div className="relative flex items-baseline justify-center gap-4 pt-3 pb-1 ">
+        <div className="relative flex items-baseline justify-center gap-4 pt-3 pb-1 md:pb-3 ">
           <div className=" absolute top-[45%] tracking-wider max-h-2 right-[1%] md:top-[47%] md:left-[1%] text-purple-900 font-[corsiva-italic] font-stretch-50%  text-xs md:text-lg lg:text-xl">
             Since 1986
           </div>{" "}
