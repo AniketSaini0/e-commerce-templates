@@ -53,15 +53,21 @@ const Navbar = ({ scrolled }) => {
           : "bg-transparent"
       }`}
     >
-      <div className=" mx-auto px-4 py-0 sm:py-1 md:py-3 lg:py-5">
+      <div
+        className={`mx-auto px-4 ${
+          scrolled
+            ? "py-0 sm:py-1 md:py-2 lg:py-3"
+            : "py-0 sm:py-1 md:py-3 lg:py-4"
+        }`}
+      >
         {/* Logo centered */}
-        <div className="relative flex items-baseline justify-center gap-4 pt-3 pb-1 md:pb-3 ">
+        <div className="relative flex items-baseline justify-center gap-4 pb-1 md:pb-3 ">
           <div className=" absolute top-[45%] tracking-wider max-h-2 right-[1%] md:top-[47%] md:left-[1%] text-purple-900 font-[corsiva-italic] font-stretch-50%  text-xs md:text-lg lg:text-xl">
             Since 1986
           </div>{" "}
           <h1
             className={`text-[#e69113] font-[DreamAvenue] tracking-[.12em] text-2xl md:text-3xl lg:text-4xl font-bold           
-              ${scrolled ? "scale-[102%] text-amber-800" : "scale-100"}`}
+              ${scrolled ? "scale-[96%] text-amber-800" : "scale-100"}`}
             style={
               scrolled
                 ? { textShadow: "1.2px 1.2px 6px rgba(249, 207, 141, 0.8)" }
@@ -74,7 +80,7 @@ const Navbar = ({ scrolled }) => {
 
         {/* Navigation items */}
         <div
-          className={`flex justify-center font-[catchymager] space-x-10 md:space-x-32 pb-2 `}
+          className={`flex justify-center font-[catchymager] space-x-10 md:space-x-32  `}
         >
           <a
             href="#ethnic"
