@@ -15,7 +15,7 @@ const NewArrivals = () => {
         }
       },
       {
-        threshold: 0.2, // 20% of the section must be visible
+        threshold: 0.27, // 20% of the section must be visible
       }
     );
 

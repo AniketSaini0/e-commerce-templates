@@ -64,7 +64,7 @@ const Customize = () => {
   return (
     <div
       ref={containerRef}
-      className="relative h-[70vh] md:h-screen w-full overflow-hidden"
+      className="relative h-[70vh] md:h-[105vh] w-full overflow-hidden"
     >
       {/* Video Background with parallax effect */}
       <div

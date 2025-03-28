@@ -13,7 +13,7 @@ const GroomClothes = () => {
         }
       },
       {
-        threshold: 0.2,
+        threshold: 0.25,
       }
     );
 
@@ -80,7 +80,9 @@ const GroomClothes = () => {
       <div className="w-full md:min-w-1/4 bg-neutral-50 md:min-h-md relative">
         <img
           className={`md:relative right-0 w-full h-full object-cover transition-all duration-700 ${
-            isVisible ? "opacity-100 scale-100" : "opacity-90 scale-105"
+            isVisible
+              ? "opacity-100 translate-y-0 scale-100"
+              : "opacity-0 translate-y-20"
           }`}
           src="/images/modern.jpeg"
           alt="Modern Attire"

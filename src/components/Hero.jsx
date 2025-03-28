@@ -140,7 +140,7 @@ const Hero = ({ scrolled }) => {
         <img
           key={image.id}
           className={`absolute inset-0 w-full sm:rounded-xl md:rounded-2xl sm:w-[88%] sm:mx-auto sm:shadow-lg sm:shadow-black  md:w-[78%] h-full mt-[10vh] sm:mt-[11vh] md:mt-[12vh] lg:mt-[17vh] object-cover transition-all duration-500 ${
-            scrolled ? "-translate-y-8" : ""
+            scrolled ? "-translate-y-8" : "translate-y-2"
           } ${currentSlide === index ? "opacity-100" : "opacity-0"}`}
           src={image.src}
           // srcSet={`${image.src} 1x, ${image.src.replace(".jpg", "@2x.jpg")} 2x`}
