@@ -52,7 +52,7 @@ const VibeCheck = () => {
       console.log("Disconnecting observer");
       observer.disconnect();
     }; // Cleanup observer on unmount
-  }, [loadedImages]);
+  }, [loadedImages, imageRefs]);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
